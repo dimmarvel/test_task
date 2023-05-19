@@ -3,10 +3,11 @@
 #include <vector>
 #include <memory>
 #include "config.hpp"
-#include "threads.hpp"
 
 namespace app::core
 {
+    class thread_pool;
+
     class parser : public std::enable_shared_from_this<parser>
     {
     public:

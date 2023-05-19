@@ -4,7 +4,11 @@
 #include <unordered_set>
 #include <condition_variable>
 #include <future>
-#include "config.hpp"
+
+namespace app
+{
+    class config;
+}
 
 namespace app::core
 {

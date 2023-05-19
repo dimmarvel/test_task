@@ -5,7 +5,6 @@
 
 namespace app
 {
-
     struct settings
     {
         int threads = std::thread::hardware_concurrency();
