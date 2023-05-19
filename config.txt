@@ -1,0 +1,5 @@
+threads=12
+root_dir=/home/dmatsiukhov/git_repos/test_task/test1
+<%COLOR%>=BLACK
+<%SIZE%>=19
+<%LONG%>=SHORT
