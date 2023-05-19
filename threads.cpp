@@ -5,7 +5,7 @@ namespace app::core
 {
     thread_pool::thread_pool(const app::config& config)
     {
-        int t_num = config.get_threads_amount();
+        uint32_t t_num = config.get_threads_amount();
         _threads.reserve(t_num);
         for (uint32_t i = 0; i < t_num; ++i)
             _threads.emplace_back(&thread_pool::run, this);

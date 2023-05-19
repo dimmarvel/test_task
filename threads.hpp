@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <condition_variable>
 #include <future>
+#include "api.hpp"
 
 namespace app
 {

@@ -45,7 +45,7 @@ namespace app
     {
         if(key == "threads")
         {
-            int t = std::stoi(val);
+            uint32_t t = std::stoi(val);
             if(t == 0)
             {
                 std::cout << "WARN: the number of threads has been increased because it is set to zero" << std::endl;

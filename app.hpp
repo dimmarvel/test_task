@@ -17,7 +17,7 @@ namespace app
 
     private:
         app::config _config;
-        std::shared_ptr<app::core::parser> _parser;
         app::core::thread_pool _th_pool;
+        std::shared_ptr<app::core::parser> _parser;
     };
 }

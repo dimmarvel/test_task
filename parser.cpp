@@ -67,14 +67,14 @@ namespace app::core
 
     void parser::handle_line(std::string& line, const api::change_rules& rules)
     {
-        int open_pos = 0;
+        size_t open_pos = 0;
         while(open_pos != std::string::npos)
         {
             open_pos = line.find("<%", (open_pos != 0) ? open_pos + 1 : open_pos);
             if(open_pos == std::string::npos) 
                 break;
 
-            int end_pos = line.find("%>", open_pos + 1); // TODO: add a constraint to search up to the longest pattern
+            size_t end_pos = line.find("%>", open_pos + 1); // TODO: add a constraint to search up to the longest pattern
             if(end_pos == std::string::npos)
                 continue;
             
