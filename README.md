@@ -7,6 +7,6 @@
 ```
 # Tests
 ```
-1. make tests
+1. make build-tests
 2. ./tests
 ```
