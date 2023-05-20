@@ -16,7 +16,7 @@ namespace app::core
     class thread_pool
     {
     public:
-        explicit thread_pool(const app::config& consfig);
+        explicit thread_pool(const app::config& config);
         ~thread_pool();
         
         void run();
@@ -29,7 +29,7 @@ namespace app::core
         {
             api::task_id_t task_id = last_id++;
 
-            std::lock_guard<std::mutex> q_lock(que_mtx);
+            std::lock_guard<std::mutex> _(que_mtx);
             que.emplace(std::async(std::launch::deferred, task, args...), task_id);
             
             que_cv.notify_one();

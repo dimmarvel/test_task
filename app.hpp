@@ -3,8 +3,6 @@
 #include "parser.hpp"
 #include "threads.hpp"
 
-//TODO: add simple unit tests
-
 namespace app
 {
     class application

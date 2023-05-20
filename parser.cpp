@@ -36,14 +36,10 @@ namespace app::core
 
     void parser::change_file(const api::file_path& file, const api::change_rules& rules)
     {
-        std::ifstream fin;
+        std::ifstream fin(file);
 
-        fin.open(file);
-        if (!fin.is_open())
-        {
-            std::cout << "ERROR: file " << file << " not found" << std::endl;
-            std::exit(EXIT_FAILURE);
-        }
+        if (!fin)
+            throw std::runtime_error("bad file " + file);
         
         std::vector<std::string> file_data; 
         std::string line;
@@ -74,7 +70,7 @@ namespace app::core
             if(open_pos == std::string::npos) 
                 break;
 
-            size_t end_pos = line.find("%>", open_pos + 1); // TODO: add a constraint to search up to the longest pattern
+            size_t end_pos = line.find("%>", open_pos + 1); // OPTIMIZE: add a constraint to search up to the longest pattern
             if(end_pos == std::string::npos)
                 continue;
             

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <exception>
 
 namespace app
 {
@@ -16,10 +17,7 @@ namespace app
         std::ifstream file(config_path);
 
         if (!file)
-        {
-            std::cout << "Error: when parse config file" << std::endl;
-            std::exit(EXIT_FAILURE);
-        }
+            throw std::runtime_error(std::string("bad file " + config_path + " when parse config file"));
 
         std::stringstream buffer;
         buffer << file.rdbuf();
@@ -58,39 +56,38 @@ namespace app
                 return;
             }
 
-            setting.threads = t;
+            _setting.threads = t;
             return;
         }
 
         if(key == "root_dir")
         {
-            setting.root_dir = val;
+            _setting.root_dir = val;
             return;
         }
 
         if( (key.at(0) == '<' && key.at(1) == '%') &&
             (key.at(key.size() - 2) == '%' && key.at(key.size() - 1) == '>'))
         {
-            if(setting.pattern_shift.find(key) != setting.pattern_shift.end())
+            if(_setting.pattern_shift.find(key) != _setting.pattern_shift.end())
             {
                 std::cout << "WARN: find same template - " << key << ", " << val << std::endl;
             }
-            setting.pattern_shift.insert({key, val});
+            _setting.pattern_shift.insert({key, val});
             return;
         }
 
-        std::cout << "ERROR: ivalid config file - " << key << ", " << val << std::endl;
-        std::exit(EXIT_FAILURE);
+        throw std::runtime_error("fail add settings when parse config file" + key + ", " + val);
     }
 
     void config::short_description()
     {
         std::cout << "------Config------" << std::endl;
-        std::cout << "Threads = " << setting.threads << std::endl
-                  << "Root dir path = " << setting.root_dir << std::endl
+        std::cout << "Threads = " << _setting.threads << std::endl
+                  << "Root dir path = " << _setting.root_dir << std::endl
                   << "Templates:" << std::endl;
                   
-        for(const auto& it : setting.pattern_shift)
+        for(const auto& it : _setting.pattern_shift)
             std::cout << it.first << " -> " << it.second << std::endl;
 
         std::cout << "------------------" << std::endl;

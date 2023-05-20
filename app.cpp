@@ -21,13 +21,17 @@ namespace app
         auto t_start = std::chrono::high_resolution_clock::now();
 
         _parser->change_by_rules();
+        
         std::clock_t c_end = std::clock();
         auto t_end = std::chrono::high_resolution_clock::now();
  
-        std::cout << std::fixed << std::setprecision(2) 
+        std::cout << "Success end" << std::endl;
+        std::cout << std::fixed << std::setprecision(2)
+                << "--------Benchmark--------\n"
                 << "CPU time: "
                 << 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms\n"
                 << "Default clock time passed: "
-                << std::chrono::duration<double, std::milli>(t_end - t_start).count() << " ms\n";
+                << std::chrono::duration<double, std::milli>(t_end - t_start).count() << " ms\n"
+                << "-------------------------\n";
     } 
 }

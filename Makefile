@@ -3,3 +3,6 @@ all:
 	
 run:
 	./out
+
+build-tests:
+	g++ -g -Wall config.cpp app.cpp parser.cpp threads.cpp tests.cpp -o tests

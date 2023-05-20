@@ -1,11 +1,18 @@
 #include "app.hpp"
 #include <iostream>
+#include <filesystem>
 
-int main(int argc, char** argv)
+int main(int argc, char *argv[])
 {
     try
     {
-        app::application app("/home/dmatsiukhov/git_repos/test_task/config.txt"); // TODO: change hardcode to argc argv
+        std::string path;
+        if(argc > 1)
+            path = argv[1];
+        else
+            path = std::filesystem::current_path().string() + "/config.txt";
+        
+        app::application app(path);
         app.start();
     }
     catch(const std::exception& e)

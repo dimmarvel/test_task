@@ -1,5 +1,4 @@
 #pragma once
-
 #include "api.hpp"
 #include <thread>
 
@@ -14,19 +13,21 @@ namespace app
 
     class config
     {
+    protected:
+        config() = default;
+        void add_setting(std::string& key, const std::string& val);
+
     public:
         explicit config(const std::string& config_path);
+    
         void parse(const std::string& config_path);
         void short_description();
         
-        std::string get_root() const { return setting.root_dir; }
-        uint32_t get_threads_amount() const { return setting.threads; }
-        api::change_rules get_pattern() const { return setting.pattern_shift; }
+        std::string get_root() const { return _setting.root_dir; }
+        uint32_t get_threads_amount() const { return _setting.threads; }
+        api::change_rules get_pattern() const { return _setting.pattern_shift; }
 
-    private:
-        void add_setting(std::string& key, const std::string& val);
-
-    private:
-        settings setting;
+    protected:
+        settings _setting;
     };
 }
