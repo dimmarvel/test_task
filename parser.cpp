@@ -19,6 +19,7 @@ namespace app::core
 
     void parser::parse_files_paths()
     {
+        //OPTIMIZE: process the file at the time of reading the paths
         for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(_config.get_root()))
             if(!dirEntry.is_directory())
                 _files.insert(dirEntry.path());
@@ -41,6 +42,8 @@ namespace app::core
         if (!fin)
             throw std::runtime_error("bad file " + file);
         
+        //OPTIMIZE: it can be overflowing with large amounts of data, 
+        //the solution is to read in pieces of H and append to the file on the fly
         std::vector<std::string> file_data; 
         std::string line;
         while (getline(fin, line, '\n'))
